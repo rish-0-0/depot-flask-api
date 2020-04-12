@@ -1,13 +1,12 @@
 import json
 import os
-from flask import Flask, render_template, request
-from flask import jsonify
+from flask import Flask, render_template, request, jsonify
 from flask_cors import CORS
 import firebase_methods
 
 config = os.environ.get('SERVICE_ACCOUNT', None)
 print(config)
-config = json.loads(config)
+config = json.loads(config.decode("utf-8"))
 
 def jsonFormat(key, value):
 	return "\""+key+"\": "+"\""+value+"\""
@@ -40,13 +39,13 @@ with open('serviceAccount.json', 'a') as appender:
 
 
 
-
-from flask import Flask
-from firebase_methods import test
-
 app = Flask(__name__)
 
 @app.route('/')
+def run():
+	return "Welcome"
+
+
 @app.route('/api', methods=['POST'])
 def index():
     response = ""
