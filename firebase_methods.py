@@ -1,6 +1,7 @@
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import firestore
+import pandas as pd
 
 
 cred = credentials.Certificate('serviceAccount.json')
@@ -20,3 +21,27 @@ def test(name):
 	# 	})
 	# it works now yay
 	return
+
+def add_excel(params):
+    message_table = {}
+    file = params['file']
+    df = pd.read_csv(file)
+    items = df.Name
+    quantity = df.Quantity
+    doc_ref = db.collection(u'StoreInfo').document(u'store1')
+    doc_ref.set({
+        u'Items': items,
+        u'Quantity': quantity,
+    })
+
+def update_excel(params):
+    message_table = {}
+    file = params['file']
+    df = pd.read_csv(file)
+    items = df.Name
+    quantity = df.Quantity
+    doc_ref = db.collection(u'StoreInfo').document(u'store1')
+    doc_ref.update({
+        u'Items': items,
+        u'Quantity': quantity,
+    })
