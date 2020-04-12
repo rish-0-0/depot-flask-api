@@ -12,9 +12,11 @@ db = firestore.client()
 
 
 def test(name):
-	doc_ref = db.collection(u'users').document(u'sample')
-	doc_ref.set({
-		u'name': u'Sample',
-		u'phone': u'+912345698765',
-		u'email': u'sample@sample.com'
-		})
+	# doc_ref = db.collection(u'users').document(u'sample')
+	# doc_ref.set({
+	# 	u'name': u'Sample',
+	# 	u'phone': u'+912345698765',
+	# 	u'email': u'sample@sample.com'
+	# 	})
+	# it works now yay
+	return
