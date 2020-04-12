@@ -40,6 +40,7 @@ with open('serviceAccount.json', 'a') as appender:
 
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route('/')
 def run():
