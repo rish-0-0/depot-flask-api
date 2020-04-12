@@ -37,13 +37,9 @@ pyasn1==0.4.8
 pyasn1-modules==0.2.8
 pycrypto==2.6.1
 pytz==2019.3
-pywin32==227
 requests==2.22.0
-ruamel-yaml==0.15.87
 six==1.14.0
 setuptools==40.3.0
 six==1.14.0
 urllib3==1.25.8
-win-inet-pton==1.1.0
-wincertstore==0.2
 Werkzeug==0.15.4
