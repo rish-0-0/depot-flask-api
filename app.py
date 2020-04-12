@@ -5,7 +5,8 @@ from flask import jsonify
 from flask_cors import CORS
 import firebase_methods
 
-config = os.environ['SERVICE_ACCOUNT']
+config = os.environ.get('SERVICE_ACCOUNT', None)
+print(config)
 config = json.loads(config)
 
 def jsonFormat(key, value):
