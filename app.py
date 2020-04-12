@@ -1,7 +1,8 @@
 import json
 import os
 
-config = os.environ['SERVICE_ACCOUNT']
+config = os.environ.get('SERVICE_ACCOUNT', None)
+print(config)
 config = json.loads(config)
 
 def jsonFormat(key, value):
