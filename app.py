@@ -37,7 +37,7 @@ with open('serviceAccount.json', 'a') as appender:
 	appender.write("}")
 
 
-
+print("SERVICE_ACCOUNT FILE MADE")
 
 app = Flask(__name__)
 CORS(app)

@@ -12,11 +12,12 @@ pyOpenSSL==19.1.0
 PySocks==1.7.1
 python-dateutil==2.8.1
 gunicorn==20.0.4
-idna==2.9
+idna==2.8
 imutils==0.5.2
 Flask_cors==3.0.8
 Flask==1.1.1
 futures==3.0.0
+grpcio==1.28.1
 google-api-core==1.16.0
 google-api-python-client==1.8.0
 google-auth==1.13.1
