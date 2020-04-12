@@ -2,7 +2,6 @@ import json
 import os
 from flask import Flask, render_template, request, jsonify
 from flask_cors import CORS
-import firebase_methods
 
 config = os.environ.get('SERVICE_ACCOUNT', None)
 print(config)
@@ -38,6 +37,7 @@ with open('serviceAccount.json', 'a') as appender:
 
 
 print("SERVICE_ACCOUNT FILE MADE")
+import firebase_methods
 
 app = Flask(__name__)
 CORS(app)
