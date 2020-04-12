@@ -1,5 +1,9 @@
 import json
 import os
+from flask import Flask, render_template, request
+from flask import jsonify
+from flask_cors import CORS
+import firebase_methods
 
 config = os.environ.get('SERVICE_ACCOUNT', None)
 print(config)
@@ -43,7 +47,22 @@ from firebase_methods import test
 app = Flask(__name__)
 
 @app.route('/')
-@app.route('/api')
+@app.route('/api', methods=['POST'])
 def index():
-	test("MyShop")
-	return "Welcome to depot-flask-api."
+    response = ""
+    json_response = ""
+
+    # Get the json from the request
+
+    req = request.get_json()
+
+    # Get the command from the json
+    action = req.get('command')
+
+    if action == 'add-excel':
+        response = firebase_methods.add_excel(req.get('params'))
+        json_response = jsonify(response)
+
+    return json_response
+	# test("MyShop")
+	# return "Welcome to depot-flask-api."
