@@ -45,3 +45,10 @@ def update_excel(params):
         u'Items': items,
         u'Quantity': quantity,
     })
+
+def get_shops(owner_id):
+    shops_ref = db.collection(u'StoreInfo')
+    query_ref = shops_ref.where(u'owner_id', u'==', unicode(owner_id))
+    docs = query_ref.stream()
+    print(docs)
+    return docs

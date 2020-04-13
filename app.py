@@ -1,4 +1,6 @@
+from functools import wraps
 import json
+import jwt
 import os
 from flask import Flask, render_template, request, jsonify
 from flask_cors import CORS
@@ -40,14 +42,50 @@ print("SERVICE_ACCOUNT FILE MADE")
 import firebase_methods
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = os.environ['HS256_KEY']
 CORS(app)
+
+
+def needs_jwt(func):
+	@wraps(func)
+	def wrapped(*args, **kwargs):
+		token = request.headers['X-AUTH-TOKEN']
+		if not token:
+			return jsonify({ 
+				'success': False,
+				'message': 'Missing Token'
+			}), 401
+		try:
+			data = jwt.decode(token, app.config['SECRET_KEY'])
+		except:
+			return jsonify({ 'success': False, 'message' : 'Invalid Token'}), 403
+		return func(*args, **kwargs)
+	return wrapped
 
 @app.route('/')
 def run():
-	return "Welcome"
+	return jsonify({
+		'success': True,
+		"message": "Welcome"
+	})
 
 
-@app.route('/api', methods=['POST'])
+@app.route('/api/v1/shops', methods=['GET'])
+@needs_jwt
+def get_shops():
+	owner_id = request.args.get('owner_id')
+	if not owner_id:
+		return jsonify({
+			success: False,
+			message: "No owner_id was specified."
+		})
+	shops_of_owner = firebase_methods.get_shops(owner_id)
+	jsonify({
+		success: True,
+		result: shops_of_owner
+	})
+
+@app.route('/api/v1/shops/upload', methods=['POST'])
 def index():
     response = ""
     json_response = ""
@@ -66,3 +104,7 @@ def index():
     return json_response
 	# test("MyShop")
 	# return "Welcome to depot-flask-api."
+
+
+if __name__ == '__main__':
+	app.run()
