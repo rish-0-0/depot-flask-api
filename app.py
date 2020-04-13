@@ -5,7 +5,7 @@ from flask_cors import CORS
 
 config = os.environ.get('SERVICE_ACCOUNT', None)
 print(config)
-config = json.loads(config.decode("utf-8"))
+config = json.loads(config)
 
 def jsonFormat(key, value):
 	return "\""+key+"\": "+"\""+value+"\""
