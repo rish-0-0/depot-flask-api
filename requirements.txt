@@ -3,7 +3,7 @@ certifi==2019.11.28
 cachetools==4.1.0
 click==5.1
 chardet==3.0.4
-cryptography==2.8
+cryptography==3.2
 numpy==1.18.2
 pandas==1.0.3
 firebase-admin==4.0.1
